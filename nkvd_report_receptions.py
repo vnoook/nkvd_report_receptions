@@ -18,21 +18,22 @@ list_all_data_fresh = []
 
 # получение всех данных из файла и его закрытие, чтобы к нему больше не возвращаться
 for row in range(wb_file_sheet_row_begin, wb_file_sheet_row_end + 1):
-    print(row)
+    # print(row)
     for col in range(wb_file_sheet_col_begin, wb_file_sheet_col_end + 1):
-        # print(f'... {row = } ... {col = } ... {wb_s.cell(row, col).value}')
-        list_all_data_fresh.append([wb_in_s.cell(row=row, column=2).value,
-                                    wb_in_s.cell(row=row, column=3).value,
-                                    wb_in_s.cell(row=row, column=10).value,
-                                    wb_in_s.cell(row=row, column=12).value,
-                                    wb_in_s.cell(row=row, column=22).value
-                                    ])
-        # if col in (2,3,10,12,22):
-        #     print(f'... {row = } ... {col = } ... {wb_s.cell(row, col).coordinate = } ... {wb_s.cell(row, col).value = }')
+        # print(f'... {row = } ... {col = } ... {wb_s.cell(row, col).coordinate = } ... {wb_s.cell(row, col).value = }')
+        pass
 
+    list_all_data_fresh.append([wb_s.cell(row=row, column=2).value,
+                                wb_s.cell(row=row, column=3).value,
+                                wb_s.cell(row=row, column=10).value,
+                                # wb_s.cell(row=row, column=12).value,
+                                wb_s.cell(row=row, column=22).value
+                                ])
 
+    # if col in (2,3,10,12,22):
+    #     print(f'... {row = } ... {col = } ... {wb_s.cell(row, col).coordinate = } ... {wb_s.cell(row, col).value = }')
 
-
+print(*list_all_data_fresh, sep='\n')
 
     # openpyxl.utils.cell.coordinate_from_string(wb_file_IC_s.cell(1, col_IC).coordinate)
     # wb_full_s.cell(wb_full_s.max_row, wb_full_s.max_column).coordinate
@@ -45,4 +46,4 @@ for row in range(wb_file_sheet_row_begin, wb_file_sheet_row_end + 1):
 
 
 
-# wb.close()
+wb.close()
