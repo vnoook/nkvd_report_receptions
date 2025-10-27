@@ -36,37 +36,35 @@ for row in list_all_data:
         otdel_dict[otdel] = otdel_dict[otdel] + 1
 # print(*otdel_dict, sep='\n')
 
+doc_dict = {}
 for otdel in otdel_dict.keys():
+    # print(otdel)
     for row in list_all_data:
         if otdel == row[0]:
-            print(row[1])
-exit()
+            # print(row[1])
+            pass
+    # print('************')
 
-doc_dict = {}
-service_dict = {}
-payment_dict = {}
+# //////////////////////////////////////////////////////////////
+# Создание DataFrame на основе
+df = pd.DataFrame(list_all_data, columns=['otdel', 'doc', 'service', 'payment'])
+print(df)
 
-    # doc = row[1]
-    # service = row[2]
-    # payment = row[3]
-    #
-    # if doc_dict.get(doc) is None:
-    #     doc_dict[doc] = 1
-    # else:
-    #     doc_dict[doc] = doc_dict[doc] + 1
-    #
-    # if service_dict.get(service) is None:
-    #     service_dict[service] = 1
-    # else:
-    #     service_dict[service] = service_dict[service] + 1
-    #
-    # if payment_dict.get(payment) is None:
-    #     payment_dict[payment] = 1
-    # else:
-    #     payment_dict[payment] = payment_dict[payment] + 1
+q_prod_name = df.pivot_table('otdel', 'otdel', aggfunc='count', fill_value = 0)
+q_prod_name.to_excel('out1.xlsx', sheet_name='Sheet1')
+q_prod_name = df.pivot_table('otdel', 'doc', aggfunc='count', fill_value = 0)
+q_prod_name.to_excel('out2.xlsx', sheet_name='Sheet1')
+q_prod_name = df.pivot_table('otdel', 'service', aggfunc='count', fill_value = 0)
+q_prod_name.to_excel('out3.xlsx', sheet_name='Sheet1')
+q_prod_name = df.pivot_table('otdel', 'payment', aggfunc='count', fill_value = 0)
+q_prod_name.to_excel('out4.xlsx', sheet_name='Sheet1')
 
-print(otdel_dict)
-print(doc_dict)
-print(service_dict)
-print(payment_dict)
+# df_group1 = df.pivot_table(['otdel', 'doc', 'service', 'money'], ['otdel', 'doc'], aggfunc='count', fill_value = 0)
+# df_group1.to_excel('out3.xlsx', sheet_name='Sheet1')
 
+# df_group1 = df_group1.reset_index()
+# for index, row in df_group1.iterrows():
+#     for val in ['doc', 'service', 'otdel', 'money']:
+#         print(f'{row[val] = }')
+#     print('*'*155)
+# df_group1.to_excel('out3.xlsx')
