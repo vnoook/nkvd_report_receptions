@@ -50,17 +50,37 @@ for otdel in otdel_dict.keys():
 df = pd.DataFrame(list_all_data, columns=['otdel', 'doc', 'service', 'payment'])
 print(df)
 
-q_prod_name = df.pivot_table('otdel', 'otdel', aggfunc='count', fill_value = 0)
-q_prod_name.to_excel('out1.xlsx', sheet_name='Sheet1')
-q_prod_name = df.pivot_table('otdel', 'doc', aggfunc='count', fill_value = 0)
-q_prod_name.to_excel('out2.xlsx', sheet_name='Sheet1')
-q_prod_name = df.pivot_table('otdel', 'service', aggfunc='count', fill_value = 0)
-q_prod_name.to_excel('out3.xlsx', sheet_name='Sheet1')
-q_prod_name = df.pivot_table('otdel', 'payment', aggfunc='count', fill_value = 0)
-q_prod_name.to_excel('out4.xlsx', sheet_name='Sheet1')
+# q_prod_name = df.pivot_table('payment', ['otdel','doc','service','payment'], aggfunc='count', fill_value = 0)
+# q_prod_name.to_excel('out20.xlsx', sheet_name='Sheet1')
 
-# df_group1 = df.pivot_table(['otdel', 'doc', 'service', 'money'], ['otdel', 'doc'], aggfunc='count', fill_value = 0)
-# df_group1.to_excel('out3.xlsx', sheet_name='Sheet1')
+q_prod_name = df.pivot_table(values=[],
+              index=['otdel','doc','service','payment'],
+              columns=['otdel','doc','service','payment'],
+              aggfunc='count')
+q_prod_name.to_excel('out20.xlsx', sheet_name='Sheet1')
+q_prod_name = df.pivot_table(values=['otdel','doc','service','payment'],
+              index=[],
+              columns=['otdel','doc','service','payment'],
+              aggfunc='count')
+q_prod_name.to_excel('out21.xlsx', sheet_name='Sheet1')
+q_prod_name = df.pivot_table(values=['otdel','doc','service','payment'],
+              index=['otdel','doc','service','payment'],
+              columns=[],
+              aggfunc='count')
+q_prod_name.to_excel('out22.xlsx', sheet_name='Sheet1')
+q_prod_name = df.pivot_table(values=['otdel','doc','service','payment'],
+              index=['otdel','doc','service','payment'],
+              columns=['otdel','doc','service','payment'])
+q_prod_name.to_excel('out23.xlsx', sheet_name='Sheet1')
+
+
+
+
+
+
+
+
+
 
 # df_group1 = df_group1.reset_index()
 # for index, row in df_group1.iterrows():
