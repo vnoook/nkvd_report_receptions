@@ -47,40 +47,59 @@ for otdel in otdel_dict.keys():
 
 # //////////////////////////////////////////////////////////////
 # Создание DataFrame на основе
-df = pd.DataFrame(list_all_data, columns=['otdel', 'doc', 'service', 'payment'])
-print(df)
+df0 = pd.DataFrame(list_all_data, columns=['otdel', 'doc', 'service', 'payment'])
+print(df0)
+df0.to_excel('out0.xlsx', sheet_name='Sheet1')
+print('*'*55)
 
-# q_prod_name = df.pivot_table('payment', ['otdel','doc','service','payment'], aggfunc='count', fill_value = 0)
-# q_prod_name.to_excel('out20.xlsx', sheet_name='Sheet1')
+# df1 = df0.groupby('otdel').count()
+# print(df1)
+# df1.to_excel('out1.xlsx', sheet_name='Sheet1')
+# print('*'*55)
+# df2 = df0.groupby('doc').count()
+# print(df2)
+# df2.to_excel('out2.xlsx', sheet_name='Sheet1')
+# print('*'*55)
+# df3 = df0.groupby('service').count()
+# print(df3)
+# df3.to_excel('out3.xlsx', sheet_name='Sheet1')
+# print('*'*55)
+# df4 = df0.groupby(['otdel', 'doc', 'service', 'payment']).count()
+# print(df4)
+# df4.to_excel('out4.xlsx', sheet_name='Sheet1')
+# print('*'*55)
 
-q_prod_name = df.pivot_table(values=[],
-              index=['otdel','doc','service','payment'],
-              columns=['otdel','doc','service','payment'],
-              aggfunc='count')
+df5 = pd.crosstab(df0['otdel'], df0['doc'], margins=True)
+print(df5)
+df5.to_excel('out5.xlsx', sheet_name='Sheet1')
+print('*'*55)
+exit()
+
+q_prod_name = df.pivot_table('payment', ['otdel','doc','service','payment'], aggfunc='count', fill_value = 0)
 q_prod_name.to_excel('out20.xlsx', sheet_name='Sheet1')
-q_prod_name = df.pivot_table(values=['otdel','doc','service','payment'],
-              index=[],
-              columns=['otdel','doc','service','payment'],
-              aggfunc='count')
-q_prod_name.to_excel('out21.xlsx', sheet_name='Sheet1')
-q_prod_name = df.pivot_table(values=['otdel','doc','service','payment'],
-              index=['otdel','doc','service','payment'],
-              columns=[],
-              aggfunc='count')
-q_prod_name.to_excel('out22.xlsx', sheet_name='Sheet1')
-q_prod_name = df.pivot_table(values=['otdel','doc','service','payment'],
-              index=['otdel','doc','service','payment'],
-              columns=['otdel','doc','service','payment'])
-q_prod_name.to_excel('out23.xlsx', sheet_name='Sheet1')
 
 
 
 
-
-
-
-
-
+# q_prod_name = df.pivot_table(values=[],
+#               index=['otdel','doc','service','payment'],
+#               columns=['otdel','doc','service','payment'],
+#               aggfunc='count')
+# q_prod_name.to_excel('out20.xlsx', sheet_name='Sheet1')
+# q_prod_name = df.pivot_table(values=['otdel','doc','service','payment'],
+#               index=[],
+#               columns=['otdel','doc','service','payment'],
+#               aggfunc='count')
+# q_prod_name.to_excel('out21.xlsx', sheet_name='Sheet1')
+# q_prod_name = df.pivot_table(values=['otdel','doc','service','payment'],
+#               index=['otdel','doc','service','payment'],
+#               columns=[],
+#               aggfunc='count')
+# q_prod_name.to_excel('out22.xlsx', sheet_name='Sheet1')
+# q_prod_name = df.pivot_table(values=['otdel','doc','service','payment'],
+#               index=['otdel','doc','service','payment'],
+#               columns=['otdel','doc','service','payment'])
+# q_prod_name.to_excel('out23.xlsx', sheet_name='Sheet1')
 
 # df_group1 = df_group1.reset_index()
 # for index, row in df_group1.iterrows():
