@@ -10,18 +10,18 @@ wb = openpyxl.load_workbook(file_xlsx)
 wb_s = wb.active
 
 # строки начала и конца
-wb_file_sheet_row_begin = 3
-wb_file_sheet_row_end = wb_s.max_row - 1
+wb_file_sheet_row_begin = 2
+wb_file_sheet_row_end = wb_s.max_row - 1 + 1
 wb_file_sheet_col_begin = wb_s.min_column
 wb_file_sheet_col_end = wb_s.max_column
 
-# получение всех данных из файла и его закрытие
+# получение всех данных из файла и его закрытие (10,2,3,22)
 list_all_data = []
 for row in range(wb_file_sheet_row_begin, wb_file_sheet_row_end + 1):
-    otdel = wb_s.cell(row=row, column=10).value
+    otdel = wb_s.cell(row=row, column=1).value
     doc = wb_s.cell(row=row, column=2).value
     service = wb_s.cell(row=row, column=3).value
-    payment = wb_s.cell(row=row, column=22).value
+    payment = wb_s.cell(row=row, column=4).value
     list_all_data.append([otdel, doc, service, payment])
 wb.close()
 # print(*list_all_data_fresh, sep='\n')
@@ -48,8 +48,11 @@ for otdel in otdel_dict.keys():
 # //////////////////////////////////////////////////////////////
 # Создание DataFrame на основе
 df0 = pd.DataFrame(list_all_data, columns=['otdel', 'doc', 'service', 'payment'])
+pd.set_option('display.width', None)
+# pd.set_option('display.max_rows', None)
 print(df0)
 df0.to_excel('out0.xlsx', sheet_name='Sheet1')
+exit()
 print('*'*55)
 
 # df1 = df0.groupby('otdel').count()
