@@ -24,7 +24,8 @@ for row in range(wb_file_sheet_row_begin, wb_file_sheet_row_end + 1):
     payment = wb_s.cell(row=row, column=4).value
     list_all_data.append([otdel, doc, service, payment])
 wb.close()
-# print(*list_all_data_fresh, sep='\n')
+# print(*list_all_data, sep='\n')
+# exit()
 
 # подсчёт данных
 otdel_dict = {}
@@ -35,6 +36,7 @@ for row in list_all_data:
     else:
         otdel_dict[otdel] = otdel_dict[otdel] + 1
 # print(*otdel_dict, sep='\n')
+# exit()
 
 doc_dict = {}
 for otdel in otdel_dict.keys():
@@ -72,17 +74,14 @@ print('*'*55)
 # df4.to_excel('out4.xlsx', sheet_name='Sheet1')
 # print('*'*55)
 
-df5 = pd.crosstab(df0['otdel'], df0['doc'], margins=True)
-print(df5)
-df5.to_excel('out5.xlsx', sheet_name='Sheet1')
-print('*'*55)
-exit()
-
-q_prod_name = df.pivot_table('payment', ['otdel','doc','service','payment'], aggfunc='count', fill_value = 0)
-q_prod_name.to_excel('out20.xlsx', sheet_name='Sheet1')
-
-
-
+# df5 = pd.crosstab(df0['otdel'], df0['doc'], margins=True)
+# print(df5)
+# df5.to_excel('out5.xlsx', sheet_name='Sheet1')
+# print('*'*55)
+# exit()
+#
+# q_prod_name = df.pivot_table('payment', ['otdel','doc','service','payment'], aggfunc='count', fill_value = 0)
+# q_prod_name.to_excel('out20.xlsx', sheet_name='Sheet1')
 
 # q_prod_name = df.pivot_table(values=[],
 #               index=['otdel','doc','service','payment'],
